@@ -1,9 +1,0 @@
-package edu.coursera.nlp.homework.one;
-
-public class Tagger {
-
-	public static void main(String[] main) {
-		final CountReader reader = new CountReader();
-		reader.read("gene.count");
-	}
-}
