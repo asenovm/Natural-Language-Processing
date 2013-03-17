@@ -18,7 +18,7 @@ public class WordReplacer {
 			throws FileNotFoundException {
 		final Scanner scanner = new Scanner(source);
 		final PrintWriter writer = new PrintWriter(destination);
-		while (scanner.hasNext()) {
+		while (scanner.hasNextLine()) {
 			final String line = scanner.nextLine();
 			final String word = line.split(SEPARATOR_WORD)[0];
 			if (words.contains(word)) {

@@ -2,7 +2,6 @@ package edu.coursera.nlp.homework.one;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class CountReader {
 	private void read(final File readFile) throws FileNotFoundException {
 		final Scanner scanner = new Scanner(readFile);
 
-		while (scanner.hasNext()) {
+		while (scanner.hasNextLine()) {
 			final String currentLine = scanner.nextLine();
 			if (currentLine.contains(TAG_WORD)) {
 				countWordsInLine(currentLine);
