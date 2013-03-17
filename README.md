@@ -9,5 +9,5 @@ course, taught by *Michael Colling* at *Coursera*.
 URL to the class: https://class.coursera.org/nlangp-001/class/index
 
 ##Author##
-Martin Asenov Asenov
+Martin Asenov Asenov<br/>
 asenov.m@gmail.com
