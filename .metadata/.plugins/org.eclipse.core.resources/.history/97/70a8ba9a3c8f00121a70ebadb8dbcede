@@ -1,0 +1,11 @@
+package edu.coursera.nlp.homework.one;
+
+import java.io.File;
+
+public class WordReplacer {
+
+	public void replaceWords(final File file, final Iterable<String> words) {
+
+	}
+
+}

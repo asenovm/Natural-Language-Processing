@@ -1,0 +1,26 @@
+package edu.coursera.nlp.homework.one;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
+
+public class Tagger {
+
+	public static final String TAG = Tagger.class.getSimpleName();
+
+	public static void main(String[] main) {
+		final CountReader reader = new CountReader();
+		final WordReplacer replacer = new WordReplacer();
+		final File trainingData = new File("../gene.train");
+		final File countData = new File("../gene.count");
+		final File destinationFile = new File("../gene.train.replaced");
+		
+		try {
+			reader.read("../gene.count");
+			final Iterable<String> rareWords = reader.getRareWords();
+			replacer.replaceWords(trainingData, destinationFile, rareWords, "_RARE_");
+		} catch (IOException ex) {
+			Logger.getAnonymousLogger().throwing(TAG, "main", ex);
+		}
+	}
+}

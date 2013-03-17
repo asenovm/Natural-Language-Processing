@@ -1,6 +1,7 @@
 package edu.coursera.nlp.homework.one;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,12 +29,13 @@ public class CountReader {
 
 	private final Map<String, Integer> wordCounts;
 
-	public CountReader() {
+	public CountReader(final File readFile) throws FileNotFoundException {
 		wordCounts = new HashMap<String, Integer>();
+		read(readFile);
 	}
 
-	public void read(final String filePath) throws IOException {
-		final Scanner scanner = new Scanner(new File(filePath));
+	private void read(final File readFile) throws FileNotFoundException {
+		final Scanner scanner = new Scanner(readFile);
 
 		while (scanner.hasNext()) {
 			final String currentLine = scanner.nextLine();
@@ -43,7 +45,7 @@ public class CountReader {
 		}
 	}
 
-	public Iterable<String> getRareWords() {
+	public Set<String> getRareWords() {
 		final Set<String> result = new HashSet<String>();
 		for (final Entry<String, Integer> entry : wordCounts.entrySet()) {
 			final String word = entry.getKey();
