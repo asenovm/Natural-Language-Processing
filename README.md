@@ -1,4 +1,8 @@
 Natural-Language-Processing
 ===========================
 
-The programming assignments to the Natural Language Processing course, led by MIchael Colling @ Coursera
+The solutions to the programming assignments that are given<br/>
+as part of the Natural Language Processing course, taught by<br/>
+*Michael Colling* at *Coursera*.
+
+https://class.coursera.org/nlangp-001/class/index
