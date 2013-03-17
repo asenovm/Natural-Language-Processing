@@ -10,11 +10,6 @@ public class Tagger {
 	/**
 	 * {@value}
 	 */
-	public static final String TAG = Tagger.class.getSimpleName();
-
-	/**
-	 * {@value}
-	 */
 	private static final String FILE_TRAINING_UPDATED = "../data/gene.train.updated";
 
 	/**
@@ -26,6 +21,11 @@ public class Tagger {
 	 * {@value}
 	 */
 	private static final String FILE_TRAINING = "../data/gene.train";
+
+	/**
+	 * {@value}
+	 */
+	public static final String TAG = Tagger.class.getSimpleName();
 
 	/**
 	 * {@value} 
