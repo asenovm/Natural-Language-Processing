@@ -1,0 +1,17 @@
+package edu.coursera.nlp.homework.one;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class CountReader {
+	private final Map<String, Integer> wordCounts;
+
+	public CountReader() {
+		wordCounts = new HashMap<String, Integer>();
+	}
+
+	public void read(final String filePath) {
+		final File sourceFile = new File(filePath);
+	}
+
+}

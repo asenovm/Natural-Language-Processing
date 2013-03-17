@@ -1,0 +1,5 @@
+package edu.coursera.nlp.homework.one;
+
+public class Tagger {
+
+}

@@ -1,0 +1,9 @@
+package edu.coursera.nlp.homework.one;
+
+public class Tagger {
+
+	public static void main(String[] main) {
+
+	}
+
+}

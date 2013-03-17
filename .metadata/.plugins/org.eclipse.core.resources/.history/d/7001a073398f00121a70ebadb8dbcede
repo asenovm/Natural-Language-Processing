@@ -1,0 +1,21 @@
+package edu.coursera.nlp.homework.one;
+
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class CountReader {
+	private final Map<String, Integer> wordCounts;
+
+	public CountReader() {
+		wordCounts = new HashMap<String, Integer>();
+	}
+
+	public void read(final String filePath) throws IOException {
+		final Scanner scanner = new Scanner(new File(filePath));
+	}
+
+}

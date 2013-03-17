@@ -1,0 +1,6 @@
+package edu.coursera.nlp.homework.one;
+
+public class CountReader {
+	private final Map<String, Integer> occurrences;
+
+}
