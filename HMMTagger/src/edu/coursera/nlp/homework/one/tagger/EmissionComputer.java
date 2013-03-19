@@ -1,10 +1,12 @@
-package edu.coursera.nlp.homework.one;
+package edu.coursera.nlp.homework.one.tagger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import edu.coursera.nlp.homework.one.model.TaggedWord;
 
 public class EmissionComputer {
 
@@ -22,6 +24,18 @@ public class EmissionComputer {
 		taggedWords = new HashMap<TaggedWord, Integer>();
 		tags = new HashMap<String, Integer>();
 		readTags(trainingData);
+
+		System.out.println("debug data start!!!!");
+
+		for (final Map.Entry<TaggedWord, Integer> each : taggedWords.entrySet()) {
+			System.out.println(each.getKey() + " " + each.getValue());
+		}
+
+		for (final Map.Entry<String, Integer> each : tags.entrySet()) {
+			System.out.println(each.getKey() + " " + each.getValue());
+		}
+
+		System.out.println("debug data end!!!!!");
 	}
 
 	private void readTags(final File trainingData) throws FileNotFoundException {
@@ -30,11 +44,14 @@ public class EmissionComputer {
 			final String line = scanner.nextLine();
 			final String[] tokens = line.split(SEPARATOR_WORD);
 
-			final String word = tokens[0];
-			final String tag = tokens[1];
+			if (tokens.length >= 2) {
+				final String word = tokens[0];
+				final String tag = tokens[1];
 
-			tagWord(word, tag);
-			countTag(tag);
+				tagWord(word, tag);
+				countTag(tag);
+			}
+
 		}
 	}
 

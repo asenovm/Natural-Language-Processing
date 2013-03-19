@@ -1,15 +1,15 @@
 package edu.coursera.nlp.homework.one;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.Set;
 
-public class CountReader {
+import edu.coursera.nlp.homework.one.access.ReadCallback;
+
+public class CountReader implements ReadCallback {
 
 	/**
 	 * {@value}
@@ -28,20 +28,8 @@ public class CountReader {
 
 	private final Map<String, Integer> wordCounts;
 
-	public CountReader(final File readFile) throws FileNotFoundException {
+	public CountReader() throws FileNotFoundException {
 		wordCounts = new HashMap<String, Integer>();
-		read(readFile);
-	}
-
-	private void read(final File readFile) throws FileNotFoundException {
-		final Scanner scanner = new Scanner(readFile);
-
-		while (scanner.hasNextLine()) {
-			final String currentLine = scanner.nextLine();
-			if (currentLine.contains(TAG_WORD)) {
-				countWordsInLine(currentLine);
-			}
-		}
 	}
 
 	public Set<String> getRareWords() {
@@ -58,6 +46,7 @@ public class CountReader {
 
 	private void countWordsInLine(final String line) {
 		final String[] tokens = line.split(SEPARATOR_WORD);
+
 		final String word = tokens[tokens.length - 1];
 		final int occurrences = Integer.parseInt(tokens[0]);
 
@@ -65,6 +54,13 @@ public class CountReader {
 			wordCounts.put(word, wordCounts.get(word) + occurrences);
 		} else {
 			wordCounts.put(word, occurrences);
+		}
+	}
+
+	@Override
+	public void onLineRead(String line) {
+		if (line.contains(TAG_WORD)) {
+			countWordsInLine(line);
 		}
 	}
 

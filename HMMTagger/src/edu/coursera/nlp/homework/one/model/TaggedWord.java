@@ -1,4 +1,4 @@
-package edu.coursera.nlp.homework.one;
+package edu.coursera.nlp.homework.one.model;
 
 public class TaggedWord {
 
@@ -17,6 +17,11 @@ public class TaggedWord {
 
 	public String getTag() {
 		return tag;
+	}
+
+	@Override
+	public String toString() {
+		return word + " " + tag;
 	}
 
 	@Override
