@@ -1,8 +1,11 @@
 package edu.coursera.nlp.homework.one.tagger;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.coursera.nlp.homework.one.access.FileReader;
 import edu.coursera.nlp.homework.one.access.ReadCallback;
 import edu.coursera.nlp.homework.one.model.TaggedWord;
 
@@ -16,6 +19,15 @@ public class ProbabilityTagger implements ReadCallback {
 	private final Map<TaggedWord, Integer> taggedWords;
 
 	private final Map<String, Integer> tags;
+
+	private class InputReader implements ReadCallback {
+
+		@Override
+		public void onLineRead(final String line) {
+			System.out.println("line is " + line);
+		}
+
+	}
 
 	public ProbabilityTagger() {
 		taggedWords = new HashMap<TaggedWord, Integer>();
@@ -52,13 +64,8 @@ public class ProbabilityTagger implements ReadCallback {
 		}
 	}
 
-	public void debug() {
-		for (final Map.Entry<TaggedWord, Integer> each : taggedWords.entrySet()) {
-			System.out.println(each.getKey() + " " + each.getValue());
-		}
-
-		for (final Map.Entry<String, Integer> each : tags.entrySet()) {
-			System.out.println(each.getKey() + " " + each.getValue());
-		}
+	public void tag(final File file) throws FileNotFoundException {
+		final FileReader reader = new FileReader();
+		reader.read(file, new InputReader());
 	}
 }

@@ -18,6 +18,11 @@ public class Tagger {
 	/**
 	 * {@value}
 	 */
+	private static final String FILE_INPUT = "../data/gene.dev";
+
+	/**
+	 * {@value}
+	 */
 	private static final String FILE_TRAINING_UPDATED = "../data/gene.train.updated";
 
 	/**
@@ -45,6 +50,7 @@ public class Tagger {
 			final File trainingData = new File(FILE_TRAINING);
 			final File countData = new File(FILE_COUNT);
 			final File destinationFile = new File(FILE_TRAINING_UPDATED);
+			final File inputFile = new File(FILE_INPUT);
 
 			final FileReader reader = new FileReader();
 
@@ -57,6 +63,8 @@ public class Tagger {
 
 			final ProbabilityTagger tagger = new ProbabilityTagger();
 			reader.read(destinationFile, tagger);
+
+			tagger.tag(inputFile);
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			Logger.getAnonymousLogger().throwing(TAG, "main", ex);
