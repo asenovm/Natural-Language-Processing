@@ -2,6 +2,7 @@ package edu.coursera.nlp.homework.one.tagger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,17 +17,78 @@ public class ProbabilityTagger implements ReadCallback {
 	 */
 	private static final String SEPARATOR_WORD = " ";
 
+	/**
+	 * {@value}
+	 */
+	private static final String WORD_RARE = "_RARE_";
+
 	private final Map<TaggedWord, Integer> taggedWords;
 
 	private final Map<String, Integer> tags;
 
+	private class TagHelper {
+
+		private final String rareWordTag;
+
+		public TagHelper() {
+			rareWordTag = getTagInternal(WORD_RARE);
+		}
+
+		public String getTagFor(final String word) {
+			final String tag = getTagInternal(word);
+			return tag == null ? rareWordTag : tag;
+		}
+
+		private String getTagInternal(final String word) {
+			double maxProbability = 0;
+			String tag = null;
+
+			for (final TaggedWord each : taggedWords.keySet()) {
+				final String currentWord = each.getWord();
+				final String currentTag = each.getTag();
+				final double currentProbability = (double) taggedWords
+						.get(each) / tags.get(currentTag);
+				if (currentWord.equals(word)
+						&& maxProbability < currentProbability) {
+					maxProbability = currentProbability;
+					tag = currentTag;
+				}
+			}
+			return tag;
+		}
+	}
+
 	private class InputReader implements ReadCallback {
+
+		private final TagHelper helper;
+
+		private PrintWriter writer;
+
+		public InputReader() {
+			helper = new TagHelper();
+			try {
+				writer = new PrintWriter("../data/gene.dev.out");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
 
 		@Override
 		public void onLineRead(final String line) {
-			System.out.println("line is " + line);
-		}
+			if (line.isEmpty()) {
+				writer.write("\n");
+				writer.flush();
+				return;
+			}
 
+			final String tag = helper.getTagFor(line);
+			writer.write(line);
+			writer.write(" ");
+			writer.write(tag);
+			writer.write("\n");
+
+			writer.flush();
+		}
 	}
 
 	public ProbabilityTagger() {
